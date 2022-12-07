@@ -17,7 +17,11 @@ class PositionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->jobTitle,
+            'description' =>fake()->sentence,
+            'salary' => fake()->numberBetween(500, 2000),
+            'admin_created_id' => 0,
+            'admin_updated_id' => 0,
         ];
     }
 }

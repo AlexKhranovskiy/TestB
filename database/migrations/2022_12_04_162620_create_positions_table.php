@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->float('salary');
             $table->integer('admin_created_id');
             $table->integer('admin_updated_id');
             $table->timestamps();

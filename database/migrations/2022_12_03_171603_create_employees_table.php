@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
+            $table->string('author_email');
             $table->date('employment_date');
             $table->string('phone');
-//            $table->string('email')->primary();
-            $table->float('salary');
             $table->string('photo');
             $table->mediumText('subordinates');
             $table->integer('admin_created_id');

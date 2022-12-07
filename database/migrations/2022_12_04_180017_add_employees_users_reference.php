@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('employees', function (Blueprint $table) {
-            $table->foreign('id')->references('id')
-                ->on('users')->onDelete('cascade');
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('id')->references('id')
-                ->on('employees')->onDelete('cascade');
-        });
+//        Schema::table('employees', function (Blueprint $table) {
+//            $table->foreign('author_email')->references('email')
+//                ->on('users')->onDelete('cascade');
+//        });
+//        Schema::table('users', function (Blueprint $table) {
+//            $table->foreign('email')->references('author_email')
+//                ->on('employees')->onDelete('cascade');
+//        });
     }
 
     /**
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subordinates');
+
     }
 };
