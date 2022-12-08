@@ -32,7 +32,6 @@ class EmployeeFactory extends Factory
             'employment_date' => fake()->date('Y-m-d'),
             'phone' => fake()->phoneNumber(),
             'photo' => $avatars[rand(0, count($avatars) - 1)],
-            'subordinates' => serialize([]),
             'admin_created_id' => 0,
             'admin_updated_id' => 0,
             'position_id' => 1
