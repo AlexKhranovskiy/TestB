@@ -49,14 +49,19 @@ class test extends Command
     {
         function bar(array $arr, $empl)
         {
-            next($arr);
-            while (current($arr)) {
-                for ($i = 0; $i <= count($arr) - 1; $i++){
-                    $buf[current($arr)][] = $empl--;
-                }
+            $count = end($arr) + 1;
+            //var_dump($arr, $count); exit;
+            if($count <= $empl) {
+                reset($arr);
                 next($arr);
+                while (current($arr)) {
+                    for ($i = 0; $i <= count($arr) - 1; $i++) {
+                        $buf[current($arr)][] = $count++;
+                    }
+                    next($arr);
+                }
+                return $buf;
             }
-            return $buf;
         }
 
         $e = 5000;
