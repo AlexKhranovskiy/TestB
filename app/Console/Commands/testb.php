@@ -42,23 +42,50 @@ class testb extends Command
         }
     }
 
+    public function executorsGrouper(&$executorsCount, $groupsCount)
+    {
+        if($executorsCount % $groupsCount) {
+            $executorsCountInGroup = intdiv($executorsCount, $groupsCount) + 1;
+        } else {
+            $executorsCountInGroup = intdiv($executorsCount, $groupsCount);
+        }
+        $i = 0;
+        $executors = [];
+        $groups = [];
+        while ($executorsCount > 0) {
+            $executors[] = $executorsCount--;
+            $i++;
+            if ($i == $executorsCountInGroup) {
+                $i = 0;
+                $groups[] = $executors;
+                unset($executors);
+            }
+        }
+        return $groups;
+    }
+
     public function handle()
     {
-        $users = User::factory(50)->create();
+        $employeesCount = 500;
+        $users = User::factory($employeesCount)->create();
 
 
-        $arr = [];
+        $directors = [];
         $u = $this->userReader($users);
 
         foreach ($this->func(5) as $f) {
             for ($i = 0; $i < $f; $i++) {
                 $c = $u->current();
-                $arr[$f][$i] = $c->id;
+                $directors[$f][$i] = $c->id;
                 $u->next();
             }
         }
 
-        var_dump($arr);
+        $lastDirectorsLevelCount = end($directors);
+        $executorsCount = $employeesCount - end($lastDirectorsLevelCount);
+       //dd(key($directors));
+        $a = $this->executorsGrouper($executorsCount, key($directors));
+        var_dump($a);
 
         return Command::SUCCESS;
     }
