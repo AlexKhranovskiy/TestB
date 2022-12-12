@@ -30,6 +30,7 @@ class testb extends Command
      */
     public function func($levels)
     {
+        //yield 0;
         for ($i = 0; $i < $levels; $i++) {
             yield pow(2, $i);
         }
@@ -42,9 +43,9 @@ class testb extends Command
         }
     }
 
-    public function executorsGrouper(&$executorsCount, $groupsCount)
+    public function executorsGrouper(&$executorsCount, $groupsCount, $u)
     {
-        if($executorsCount % $groupsCount) {
+        if ($executorsCount % $groupsCount) {
             $executorsCountInGroup = intdiv($executorsCount, $groupsCount) + 1;
         } else {
             $executorsCountInGroup = intdiv($executorsCount, $groupsCount);
@@ -52,40 +53,55 @@ class testb extends Command
         $i = 0;
         $executors = [];
         $groups = [];
-        while ($executorsCount > 0) {
-            $executors[] = $executorsCount--;
+        while ($u->valid()) {
+            $c = $u->current();
+            $executors[] = $c->id;
             $i++;
             if ($i == $executorsCountInGroup) {
                 $i = 0;
-                $groups[] = $executors;
+                $groups[$groupsCount] = $executors;
                 unset($executors);
+                $groupsCount++;
             }
+            $u->next();
         }
         return $groups;
     }
 
     public function handle()
     {
-        $employeesCount = 500;
+        $employeesCount = 60;
         $users = User::factory($employeesCount)->create();
 
 
         $directors = [];
         $u = $this->userReader($users);
-
-        foreach ($this->func(5) as $f) {
-            for ($i = 0; $i < $f; $i++) {
+        $c = null;
+        $k = $this->func(5);
+        //$l = $k;
+        while ($k->valid()) {
+            $l = $k->current();
+            for ($i = 0; $i < $l; $i++) {
                 $c = $u->current();
-                $directors[$f][$i] = $c->id;
+                $directors[$l][$i] = $c->id;
                 $u->next();
             }
+            $k->next();
         }
-
-        $lastDirectorsLevelCount = end($directors);
-        $executorsCount = $employeesCount - end($lastDirectorsLevelCount);
-       //dd(key($directors));
-        $a = $this->executorsGrouper($executorsCount, key($directors));
-        var_dump($a);
+//        foreach ($this->func(5) as $f) {
+//            for ($i = 0; $i < $f; $i++) {
+//                var_dump($f);
+//                $c = $u->current();
+//                $directors[$f][$i] = $c->id;
+//                $u->next();
+//            }
+//        }
+        //exit;
+        $lastDirectorsLevel = end($directors);
+        $executorsCount = $employeesCount - end($lastDirectorsLevel) + 1;
+        $lastDirectorsLevelCount = count($lastDirectorsLevel);
+        $a = $this->executorsGrouper($executorsCount, $lastDirectorsLevelCount, $u);
+        var_dump($directors);
 
         return Command::SUCCESS;
     }
