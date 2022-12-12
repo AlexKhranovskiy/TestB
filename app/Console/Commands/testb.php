@@ -28,6 +28,31 @@ class testb extends Command
      *
      * @return int
      */
+    public function t($arr): array
+    {
+        $buf = [];
+        $count = 0;
+        foreach ($arr as $key => $value) {
+            if (count($value) == 1) {
+                $buf[$count] = $value;
+            } elseif (count($value) == 2) {
+                $buf[$count] = $value;
+            } else {
+                $buff = array_chunk($value, log($key, 2));
+                foreach ($buff as $item) {
+                    var_dump('value=',$value);
+                    var_dump('item=',$item);
+                    //var_dump($item);
+                    $buf[$count] = $item;
+                    $count++;
+                }
+                continue;
+            }
+            $count++;
+        } exit;
+        return $buf;
+    }
+
     public function func($levels)
     {
         //yield 0;
@@ -101,7 +126,7 @@ class testb extends Command
         $executorsCount = $employeesCount - end($lastDirectorsLevel) + 1;
         $lastDirectorsLevelCount = count($lastDirectorsLevel);
         $a = $this->executorsGrouper($executorsCount, $lastDirectorsLevelCount, $u);
-        var_dump($directors);
+        var_dump($this->t($directors));
 
         return Command::SUCCESS;
     }
