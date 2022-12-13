@@ -28,27 +28,6 @@ class testb extends Command
      *
      * @return int
      */
-//    public function t($arr): array
-//    {
-//        $buf = [];
-//        $count = 0;
-//        foreach ($arr as $key => $value) {
-//            if (count($value) == 1) {
-//                $buf[$count] = $value;
-//            } elseif (count($value) == 2) {
-//                $buf[$count] = $value;
-//            } else {
-//                $buff = array_chunk($value, 2);
-//                foreach ($buff as $item) {
-//                    $buf[$count] = $item;
-//                    $count++;
-//                }
-//                continue;
-//            }
-//            $count++;
-//        }
-//        return $buf;
-//    }
 
     public function func($levels)
     {
