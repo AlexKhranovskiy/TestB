@@ -28,27 +28,27 @@ class testb extends Command
      *
      * @return int
      */
-    public function t($arr): array
-    {
-        $buf = [];
-        $count = 0;
-        foreach ($arr as $key => $value) {
-            if (count($value) == 1) {
-                $buf[$count] = $value;
-            } elseif (count($value) == 2) {
-                $buf[$count] = $value;
-            } else {
-                $buff = array_chunk($value, 2);
-                foreach ($buff as $item) {
-                    $buf[$count] = $item;
-                    $count++;
-                }
-                continue;
-            }
-            $count++;
-        }
-        return $buf;
-    }
+//    public function t($arr): array
+//    {
+//        $buf = [];
+//        $count = 0;
+//        foreach ($arr as $key => $value) {
+//            if (count($value) == 1) {
+//                $buf[$count] = $value;
+//            } elseif (count($value) == 2) {
+//                $buf[$count] = $value;
+//            } else {
+//                $buff = array_chunk($value, 2);
+//                foreach ($buff as $item) {
+//                    $buf[$count] = $item;
+//                    $count++;
+//                }
+//                continue;
+//            }
+//            $count++;
+//        }
+//        return $buf;
+//    }
 
     public function func($levels)
     {
@@ -91,24 +91,13 @@ class testb extends Command
 
     public function handle()
     {
-        $employeesCount = 60;
+        $employeesCount = 140;
         $users = User::factory($employeesCount)->create();
 
 
         $directors = [];
         $u = $this->userReader($users);
-        $c = null;
-        $k = $this->func(5);
-//        //$l = $k;
-//        while ($k->valid()) {
-//            $l = $k->current();
-//            for ($i = 0; $i < $l; $i++) {
-//                $c = $u->current();
-//                $directors[$l][$i] = $c->id;
-//                $u->next();
-//            }
-//            $k->next();
-//        }
+
         foreach ($this->func(5) as $f) {
             for ($i = 0; $i < $f; $i++) {
                  $c = $u->current();
@@ -117,10 +106,33 @@ class testb extends Command
             }
         }
         $lastDirectorsLevel = end($directors);
+
+        $buf = [];
+        $count = 0;
+        foreach ($directors as $director) {
+            if (count($director) == 1) {
+                $buf[$count] = $director;
+            } elseif (count($director) == 2) {
+                $buf[$count] = $director;
+            } else {
+                foreach (array_chunk($director, 2) as $item) {
+                    $buf[$count] = $item;
+                    $count++;
+                }
+                continue;
+            }
+            $count++;
+        }
+        $directors= $buf;
+        unset($buf);
+
+
+
         $executorsCount = $employeesCount - end($lastDirectorsLevel) + 1;
         $lastDirectorsLevelCount = count($lastDirectorsLevel);
         $a = $this->executorsGrouper($executorsCount, $lastDirectorsLevelCount, $u);
-        var_dump($this->t($directors));
+        array_push($directors, $a);
+        var_dump($directors);
 
         return Command::SUCCESS;
     }
