@@ -38,24 +38,20 @@ class testb extends Command
             } elseif (count($value) == 2) {
                 $buf[$count] = $value;
             } else {
-                $buff = array_chunk($value, log($key, 2));
+                $buff = array_chunk($value, 2);
                 foreach ($buff as $item) {
-                    var_dump('value=',$value);
-                    var_dump('item=',$item);
-                    //var_dump($item);
                     $buf[$count] = $item;
                     $count++;
                 }
                 continue;
             }
             $count++;
-        } exit;
+        }
         return $buf;
     }
 
     public function func($levels)
     {
-        //yield 0;
         for ($i = 0; $i < $levels; $i++) {
             yield pow(2, $i);
         }
@@ -103,25 +99,23 @@ class testb extends Command
         $u = $this->userReader($users);
         $c = null;
         $k = $this->func(5);
-        //$l = $k;
-        while ($k->valid()) {
-            $l = $k->current();
-            for ($i = 0; $i < $l; $i++) {
-                $c = $u->current();
-                $directors[$l][$i] = $c->id;
-                $u->next();
-            }
-            $k->next();
-        }
-//        foreach ($this->func(5) as $f) {
-//            for ($i = 0; $i < $f; $i++) {
-//                var_dump($f);
+//        //$l = $k;
+//        while ($k->valid()) {
+//            $l = $k->current();
+//            for ($i = 0; $i < $l; $i++) {
 //                $c = $u->current();
-//                $directors[$f][$i] = $c->id;
+//                $directors[$l][$i] = $c->id;
 //                $u->next();
 //            }
+//            $k->next();
 //        }
-        //exit;
+        foreach ($this->func(5) as $f) {
+            for ($i = 0; $i < $f; $i++) {
+                 $c = $u->current();
+                $directors[$f][$i] = $c->id;
+                $u->next();
+            }
+        }
         $lastDirectorsLevel = end($directors);
         $executorsCount = $employeesCount - end($lastDirectorsLevel) + 1;
         $lastDirectorsLevelCount = count($lastDirectorsLevel);
