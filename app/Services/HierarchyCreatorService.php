@@ -19,35 +19,35 @@ class HierarchyCreatorService
 
     public function set(Collection $usersFromFactory)
     {
-        $directors = [];
+        $hierarchy = [];
         $u = $this->userReader($usersFromFactory);
 
         foreach ($this->shaper($this->hierarchyLevels) as $f) {
             for ($i = 0; $i < $f; $i++) {
                 $c = $u->current();
-                $directors[$f][$i] = $c->id;
+                $hierarchy[$f][$i] = $c->id;
                 $u->next();
             }
         }
-        $lastDirectorsLevel = end($directors);
+        $lastDirectorsLevel = end($hierarchy);
 
         $buf = [];
         $count = 0;
-        foreach ($directors as $director) {
-            if (count($director) == 1) {
-                $buf[$count] = $director;
-            } elseif (count($director) == 2) {
-                $buf[$count] = $director;
+        foreach ($hierarchy as $item) {
+            if (count($item) == 1) {
+                $buf[$count] = $item;
+            } elseif (count($item) == 2) {
+                $buf[$count] = $item;
             } else {
-                foreach (array_chunk($director, 2) as $item) {
-                    $buf[$count] = $item;
+                foreach (array_chunk($item, 2) as $value) {
+                    $buf[$count] = $value;
                     $count++;
                 }
                 continue;
             }
             $count++;
         }
-        $directors= $buf;
+        $hierarchy = $buf;
         unset($buf);
 
         $executorsCount = $this->employeesCount - end($lastDirectorsLevel) + 1;
@@ -65,12 +65,12 @@ class HierarchyCreatorService
             $i++;
             if ($i == $executorsCountInGroup) {
                 $i = 0;
-                array_push($directors, $executors);
+                array_push($hierarchy, $executors);
                 unset($executors);
             }
             $u->next();
         }
-        $this->result = $directors;
+        $this->result = $hierarchy;
     }
 
     private function shaper($levels)
