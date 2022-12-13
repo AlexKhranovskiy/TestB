@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\HierarchyCreatorService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +12,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
+    public function register()    {
+
+        $this->app->bind(HierarchyCreatorService::class, function(){
+            return new HierarchyCreatorService(
+                env('EMPLOYEES_COUNT'),
+            env('HIERARCHY_LEVELS'));
+        });
     }
 
     /**
