@@ -50,14 +50,27 @@ class HierarchyCreatorService
         $directors= $buf;
         unset($buf);
 
-
-
         $executorsCount = $this->employeesCount - end($lastDirectorsLevel) + 1;
         $lastDirectorsLevelCount = count($lastDirectorsLevel);
-        $a = $this->executorsGrouper($executorsCount, $lastDirectorsLevelCount, $u);
-        array_push($directors, $a);
+        if ($executorsCount % $lastDirectorsLevelCount) {
+            $executorsCountInGroup = intdiv($executorsCount, $lastDirectorsLevelCount) + 1;
+        } else {
+            $executorsCountInGroup = intdiv($executorsCount, $lastDirectorsLevelCount);
+        }
+        $i = 0;
+        $executors = [];
+        while ($u->valid()) {
+            $c = $u->current();
+            $executors[] = $c->id;
+            $i++;
+            if ($i == $executorsCountInGroup) {
+                $i = 0;
+                array_push($directors, $executors);
+                unset($executors);
+            }
+            $u->next();
+        }
         $this->result = $directors;
-
     }
 
     private function shaper($levels)
@@ -72,31 +85,6 @@ class HierarchyCreatorService
         foreach ($users as $user) {
             yield $user;
         }
-    }
-
-    public function executorsGrouper(&$executorsCount, $groupsCount, $u)
-    {
-        if ($executorsCount % $groupsCount) {
-            $executorsCountInGroup = intdiv($executorsCount, $groupsCount) + 1;
-        } else {
-            $executorsCountInGroup = intdiv($executorsCount, $groupsCount);
-        }
-        $i = 0;
-        $executors = [];
-        $groups = [];
-        while ($u->valid()) {
-            $c = $u->current();
-            $executors[] = $c->id;
-            $i++;
-            if ($i == $executorsCountInGroup) {
-                $i = 0;
-                $groups[$groupsCount] = $executors;
-                unset($executors);
-                $groupsCount++;
-            }
-            $u->next();
-        }
-        return $groups;
     }
 
     public function result()
