@@ -4,18 +4,18 @@
 namespace App\Services;
 
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class HierarchyCreatorService
 {
-    private $result;
+    private array $hierarchy;
 
     public function __construct(
         private int $employeesCount,
         private int $hierarchyLevels
     )
-    {}
+    {
+    }
 
     public function set(Collection $usersFromFactory)
     {
@@ -35,6 +35,7 @@ class HierarchyCreatorService
         $count = 0;
         foreach ($hierarchy as $item) {
             if (count($item) == 1) {
+                $user = $usersFromFactory->find($count);
                 $buf[$count] = $item;
             } elseif (count($item) == 2) {
                 $buf[$count] = $item;
@@ -70,7 +71,7 @@ class HierarchyCreatorService
             }
             $u->next();
         }
-        $this->result = $hierarchy;
+        $this->hierarchy = $hierarchy;
     }
 
     private function shaper($levels)
@@ -87,8 +88,17 @@ class HierarchyCreatorService
         }
     }
 
-    public function result()
+    public function hierarchy()
     {
-        return $this->result;
+        return $this->hierarchy;
+    }
+
+    public function getDirectorByExecutorId(int $id)
+    {
+        foreach ($this->hierarchy as $key => $item){
+            if(in_array($id, $item)){
+                return $key;
+            }
+        }
     }
 }

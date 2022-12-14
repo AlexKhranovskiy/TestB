@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('employment_date');
             $table->string('phone');
             $table->string('photo');
-            $table->mediumText('subordinates');
+            $table->mediumText('director');
             $table->integer('admin_created_id');
             $table->integer('admin_updated_id');
             $table->timestamps();
