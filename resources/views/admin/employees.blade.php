@@ -6,28 +6,28 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Avatar</th>
-                <th scope="col">Name</th>
+                <th scope="col">Full name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Varified at</th>
-                <th scope="col">Remember token</th>
+                <th scope="col">Employment date</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Photo</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($employees as $employee)
                 <tr>
-                    <th scope="row">{{$user->id}}</th>
+                    <th scope="row">{{$employee->id}}</th>
+                    <td>{{$employee->full_name}}</td>
+                    <td>{{$employee->author_email}}</td>
+                    <td>{{$employee->employment_date}}</td>
+                    <td>{{$employee->phone}}</td>
                     <td>
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                <img alt="Avatar" class="table-avatar" src="../../dist/img/{{$employee->photo}}">
                             </li>
                         </ul>
                     </td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>{{$user->email_verified_at}}</td>
-                    <td>{{$user->remember_token}}</td>
                 </tr>
             @endforeach
             </tbody>

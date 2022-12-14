@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Post\IndexController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin/posts', IndexController::class);
+Route::get('/admin', [AdminController::class , 'indexAction']);

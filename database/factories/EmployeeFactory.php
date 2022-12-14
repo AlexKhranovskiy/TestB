@@ -20,7 +20,6 @@ class EmployeeFactory extends Factory
     {
         $avatars = [
             'avatar.png',
-            'avatar1.png',
             'avatar2.png',
             'avatar3.png',
             'avatar4.png',
