@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', [AdminController::class , 'indexAction']);
+Route::get('/admin/employees', [EmployeesController::class , 'indexAction'])
+    ->name('employees.index');
+Route::get('/admin/employees/{id}', [EmployeesController::class , 'showAction'])
+    ->name('employees.show');

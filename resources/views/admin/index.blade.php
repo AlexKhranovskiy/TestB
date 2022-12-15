@@ -13,6 +13,7 @@
                 <th scope="col">Employment date</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Photo</th>
+                <th scope="col">Edition</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                             </li>
                         </ul>
                     </td>
+                    <td><a class="btn btn-outline-secondary btn-sm" href="{{route('employees.show',[$employee->id])}}">Edit</a></td>
                 </tr>
             @endforeach
             </tbody>
