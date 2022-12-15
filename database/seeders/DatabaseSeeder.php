@@ -21,12 +21,15 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(env('EMPLOYEES_COUNT'))->create();
         $hierarchyCreatorService->set($users);
 
-        Position::factory(4)->create();
+        $positions = Position::factory(4)->create();
 
-        foreach ($users as $u) {
-            Employee::factory(1)->create(['author_email' => $u->email,
-                    'director' => serialize($hierarchyCreatorService->getDirectorByExecutorId($u->id))
-                ]);
+        foreach ($users as $user) {
+            Employee::factory(1)->create(['author_email' => $user->email,
+                'director' => serialize(
+                    $hierarchyCreatorService->getDirectorByExecutorId($user->id)
+                ),
+                'position_id' => rand(1, count($positions))
+            ]);
         }
     }
 }
