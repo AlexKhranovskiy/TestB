@@ -7,6 +7,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Full name</th>
+                <th scope="col">Position</th>
                 <th scope="col">Email</th>
                 <th scope="col">Employment date</th>
                 <th scope="col">Phone</th>
@@ -18,6 +19,7 @@
                 <tr>
                     <th scope="row">{{$employee->id}}</th>
                     <td>{{$employee->full_name}}</td>
+                    <td>{{$employee->position->name}}</td>
                     <td>{{$employee->author_email}}</td>
                     <td>{{$employee->employment_date}}</td>
                     <td>{{$employee->phone}}</td>

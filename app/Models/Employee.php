@@ -26,8 +26,8 @@ class Employee extends Model
         return $this->belongsTo(User::class, 'author_email', 'author_email');
     }
 
-    public function positions()
+    public function position()
     {
-        return$this->belongsToMany(Position::class);
+        return $this->belongsTo(Position::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Employee;
 use Illuminate\Console\Command;
 
 class test extends Command
@@ -31,8 +32,8 @@ class test extends Command
 
     public function handle()
     {
-
-        var_dump(env('EMPLOYEES_COUNT'));
+        $employees = Employee::find(2);
+        var_dump($employees->position->name);
         return Command::SUCCESS;
     }
 }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(env('EMPLOYEES_COUNT'))->create();
         $hierarchyCreatorService->set($users);
 
-        Position::factory(2)->create();
+        Position::factory(4)->create();
 
         foreach ($users as $u) {
             Employee::factory(1)->create(['author_email' => $u->email,
