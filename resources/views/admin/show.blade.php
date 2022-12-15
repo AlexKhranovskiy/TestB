@@ -22,6 +22,14 @@
                                    placeholder="{{$data['author_email']}}">
                         </div>
                         <div class="form-group">
+
+{{--                            <div class="input-group">--}}
+{{--                                <div class="input-group-prepend">--}}
+{{--                                    <span class="input-group-text"></span>--}}
+{{--                                </div>--}}
+{{--                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>--}}
+{{--                            </div>--}}
+
                             <label>Employment date:</label>
                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                 <input type="text" placeholder="{{$data['employment_date']}}" class="form-control datetimepicker-input"
@@ -51,4 +59,13 @@
             </div>
         </form>
     </div>
+@endsection
+@section('footer-js')
+    <script>
+        $(function () {
+            $('#reservationdate').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+        })
+    </script>
 @endsection
