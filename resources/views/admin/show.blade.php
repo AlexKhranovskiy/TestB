@@ -43,14 +43,11 @@
                                        data-mask placeholder="{{$data['phone']}}">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for=""></label>
-                            <input type="email" class="form-control" id="" placeholder="">
-                        </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card-body">
-
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="{{$data['author_email']}}">
                         </div>
                     </div>
                 </div>
@@ -102,9 +99,9 @@
             })
 
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
             //Money Euro
             $('[data-mask]').inputmask()
 
@@ -114,7 +111,7 @@
             });
 
             //Date and time picker
-            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+            $('#reservationdatetime').datetimepicker({icons: {time: 'far fa-clock'}});
 
             //Date range picker
             $('#reservation').daterangepicker()
@@ -129,16 +126,16 @@
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
-                    ranges   : {
-                        'Today'       : [moment(), moment()],
-                        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
                     startDate: moment().subtract(29, 'days'),
-                    endDate  : moment()
+                    endDate: moment()
                 },
                 function (start, end) {
                     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -158,11 +155,11 @@
             //color picker with addon
             $('.my-colorpicker2').colorpicker()
 
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
                 $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
             })
 
-            $("input[data-bootstrap-switch]").each(function(){
+            $("input[data-bootstrap-switch]").each(function () {
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             })
 
@@ -192,17 +189,19 @@
             clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
         })
 
-        myDropzone.on("addedfile", function(file) {
+        myDropzone.on("addedfile", function (file) {
             // Hookup the start button
-            file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+            file.previewElement.querySelector(".start").onclick = function () {
+                myDropzone.enqueueFile(file)
+            }
         })
 
         // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function(progress) {
+        myDropzone.on("totaluploadprogress", function (progress) {
             document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
         })
 
-        myDropzone.on("sending", function(file) {
+        myDropzone.on("sending", function (file) {
             // Show the total progress bar when upload starts
             document.querySelector("#total-progress").style.opacity = "1"
             // And disable the start button
@@ -210,17 +209,17 @@
         })
 
         // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("queuecomplete", function(progress) {
+        myDropzone.on("queuecomplete", function (progress) {
             document.querySelector("#total-progress").style.opacity = "0"
         })
 
         // Setup the buttons for all transfers
         // The "add files" button doesn't need to be setup because the config
         // `clickable` has already been specified.
-        document.querySelector("#actions .start").onclick = function() {
+        document.querySelector("#actions .start").onclick = function () {
             myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
         }
-        document.querySelector("#actions .cancel").onclick = function() {
+        document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
         // DropzoneJS Demo Code End
