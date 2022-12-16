@@ -23,8 +23,9 @@ class EmployeesController extends Controller
             'author_email' => $employee->author_email,
             'employment_date' => $employee->employment_date,
             'phone' => $employee->phone,
+            'salary' => $employee->position->salary,
             'photo' => $employee->photo,
-            'director' => $employee->directo,
+            'director' => $employee->director,
             'position_id' => $employee->position_id
         ];
         return view('admin.show', ['data' => $data]);

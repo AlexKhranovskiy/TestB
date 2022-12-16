@@ -46,8 +46,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="{{$data['author_email']}}">
+                            <label>Salary:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control"
+                                       data-mask placeholder="{{$data['salary']}}">
+                            </div>
                         </div>
                     </div>
                 </div>
