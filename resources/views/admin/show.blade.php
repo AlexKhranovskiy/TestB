@@ -77,6 +77,13 @@
                                        data-mask placeholder="{{$data['salary']}}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>D:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-mask placeholder="{{$data['director_full_name']}}">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
