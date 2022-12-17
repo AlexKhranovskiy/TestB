@@ -11,6 +11,28 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group-sm">
+                                        <label for="photo">Photo:</label>
+                                        <div class="mb-2">
+                                            <img class="profile-user-img img-circle"
+                                                 src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="customFile">Choose file:</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">File</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="{{$data['full_name']}}">Full name</label>
                             <input type="text" name="full_name" class="form-control" id="{{$data['full_name']}}"
