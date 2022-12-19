@@ -55,6 +55,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Phone:</label>
                             <div class="input-group">
@@ -65,8 +67,6 @@
                                        data-mask placeholder="{{$data['phone']}}">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Salary:</label>
                             <div class="input-group">
