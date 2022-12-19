@@ -24,6 +24,7 @@ class EmployeesController extends Controller
         $directorFullName = $employeesService->getDirectorFullName($employee);
 
         $data = [
+            'id' => $employee->id,
             'full_name' => $employee->full_name,
             'author_email' => $employee->author_email,
             'employment_date' => $employee->employment_date,
@@ -36,5 +37,12 @@ class EmployeesController extends Controller
             'position_list' => $employeesService->getPositionsList()
         ];
         return view('admin.show', ['data' => $data]);
+    }
+
+    public function editPhoto(EmployeesService $employeesService, Request $request)
+    {
+        $employeesService->editPhoto($request, $request->id);
+
+        return redirect()->back();
     }
 }

@@ -7,6 +7,8 @@ namespace App\Services;
 use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesService
 {
@@ -58,5 +60,17 @@ class EmployeesService
     public function getPositionsList(): Collection
     {
       return Position::all();
+    }
+
+    public function editPhoto(Request $request, int $employeeId)
+    {
+        $file = $request->file('photo');
+        if ($file) {
+            $file->store('public');
+        }
+        $employee = Employee::find($employeeId);
+        Storage::delete('public/' . $employee->photo);
+        $employee->photo = $file->hashName();
+        $employee->save();
     }
 }

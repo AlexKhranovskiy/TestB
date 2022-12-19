@@ -18,3 +18,5 @@ Route::get('/admin/employees', [EmployeesController::class , 'indexAction'])
     ->name('employees.index');
 Route::get('/admin/employees/{id}', [EmployeesController::class , 'showAction'])
     ->name('employees.show');
+Route::patch('/admin/employees/{id}', [EmployeesController::class , 'editPhoto'])
+    ->name('employees.update');

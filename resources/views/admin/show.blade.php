@@ -7,7 +7,9 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form method="POST" action="{{route('employees.update', [$data['id']])}}" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PATCH">
+            @csrf
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -18,7 +20,7 @@
                                         <label for="photo">Photo:</label>
                                         <div class="mb-2">
                                             <img class="profile-user-img img-circle"
-                                                 src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Image">
+                                                 src="{{asset('storage/' . $data['photo'])}}" alt="User Image">
                                         </div>
                                     </div>
                                 </div>
@@ -26,7 +28,7 @@
                                     <div class="form-group">
                                         <label for="customFile">Choose file:</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <input type="file" name="photo" class="custom-file-input" id="customFile">
                                             <label class="custom-file-label" for="customFile">File</label>
                                         </div>
                                     </div>
