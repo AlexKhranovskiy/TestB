@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    public function indexAction()
+    public function indexAction(EmployeesService $employeesService)
     {
         $employees = Employee::all();
-        return view('admin.index', ['employees' => $employees]);
+        //$directors = $employeesService->getCollectionOfDirectors($employees);
+
+        return view('admin.index', [
+            'employees' => $employees,
+            'employeesService' => $employeesService
+            ]);
     }
 
     public function showAction(Request $request, EmployeesService $employeesService)

@@ -32,7 +32,7 @@
                             </li>
                         </ul>
                     </td>
-                    <td>{{$employee->full_name}}</td>
+                    <td>{{$employeesService->getDirectorFullName($employee)}}</td>
                     <td><a class="btn btn-outline-secondary btn-sm" href="{{route('employees.show',[$employee->id])}}">Edit</a>
                     </td>
                 </tr>
