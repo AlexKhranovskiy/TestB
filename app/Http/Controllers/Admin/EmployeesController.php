@@ -12,8 +12,6 @@ class EmployeesController extends Controller
     public function indexAction(EmployeesService $employeesService)
     {
         $employees = Employee::all();
-        //$directors = $employeesService->getCollectionOfDirectors($employees);
-
         return view('admin.index', [
             'employees' => $employees,
             'employeesService' => $employeesService
@@ -23,8 +21,7 @@ class EmployeesController extends Controller
     public function showAction(Request $request, EmployeesService $employeesService)
     {
         $employee = Employee::find($request->id);
-        $employeesService->setEmployee($employee);
-        $directorFullName = $employeesService->getDirector()->full_name;
+        $directorFullName = $employeesService->getDirectorFullName($employee);
 
         $data = [
             'full_name' => $employee->full_name,
