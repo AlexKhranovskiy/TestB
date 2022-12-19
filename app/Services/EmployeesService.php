@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
 
 class EmployeesService
@@ -42,9 +43,20 @@ class EmployeesService
     {
         $directors = [];
         $employee = Employee::where('is_director', '=', 1)->get();
-        $employee->each(function($item) use(&$directors){
+        $employee->each(function ($item) use (&$directors) {
             $directors[] = $item->full_name;
         });
         return $directors;
+    }
+
+    public function getPosition(int $id)
+    {
+        $employee = Employee::find($id);
+        return $employee->position->name;
+    }
+
+    public function getPositionsList(): Collection
+    {
+      return Position::all();
     }
 }

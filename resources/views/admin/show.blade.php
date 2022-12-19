@@ -78,11 +78,26 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>Position:</label>
+                            <select class="form-control select2 select2-info" data-dropdown-css-class="select2-info"
+                                    style="width: 100%;">
+                                <option selected="selected">{{$data['position_name']}}</option>
+                                @foreach($data['position_list'] as $positionList)
+                                    @if($positionList->name !== $data['position_name'])
+                                        <option>{{$positionList->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Director:</label>
-                            <select class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;">
+                            <select class="form-control select2 select2-info" data-dropdown-css-class="select2-info"
+                                    style="width: 100%;">
                                 <option selected="selected">{{$data['director_full_name']}}</option>
                                 @foreach($data['directors_list'] as $directorFullName)
-                                    <option>{{$directorFullName}}</option>
+                                    @if($directorFullName !== $data['director_full_name'])
+                                        <option>{{$directorFullName}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

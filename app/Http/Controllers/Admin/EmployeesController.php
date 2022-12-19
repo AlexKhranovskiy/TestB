@@ -32,7 +32,8 @@ class EmployeesController extends Controller
             'photo' => $employee->photo,
             'director_full_name' => $directorFullName,
             'directors_list' => $employeesService->getDirectorsFullNameList(),
-            'position_id' => $employee->position_id
+            'position_name' => $employeesService->getPosition($request->id),
+            'position_list' => $employeesService->getPositionsList()
         ];
         return view('admin.show', ['data' => $data]);
     }
