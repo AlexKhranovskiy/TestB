@@ -16,6 +16,7 @@ class Employee extends Model
         'phone',
         'photo',
         'director',
+        'is_director',
         'admin_created_id',
         'admin_updated_id',
         'position_id',

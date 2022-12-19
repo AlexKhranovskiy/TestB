@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 class HierarchyCreatorService
 {
     private array $hierarchy;
+    private array $nodes;
 
     public function __construct(
         private int $employeesCount,
@@ -72,6 +73,7 @@ class HierarchyCreatorService
             $u->next();
         }
         $this->hierarchy = $hierarchy;
+        $this->nodes = array_keys($this->hierarchy);
     }
 
     private function shaper($levels)
@@ -95,10 +97,16 @@ class HierarchyCreatorService
 
     public function getDirectorByExecutorId(int $id)
     {
-        foreach ($this->hierarchy as $key => $item){
-            if(in_array($id, $item)){
+        foreach ($this->hierarchy as $key => $item) {
+            if (in_array($id, $item)) {
                 return $key;
             }
         }
+        return null;
+    }
+
+    public function isNode(int $id)
+    {
+        return in_array($id, $this->nodes);
     }
 }

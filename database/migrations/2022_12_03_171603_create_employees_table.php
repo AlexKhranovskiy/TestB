@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('photo');
             $table->mediumText('director');
+            $table->tinyInteger('is_director')->default(0);
             $table->integer('admin_created_id');
             $table->integer('admin_updated_id');
             $table->timestamps();

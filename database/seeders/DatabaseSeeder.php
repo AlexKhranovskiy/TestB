@@ -24,10 +24,11 @@ class DatabaseSeeder extends Seeder
         $positions = Position::factory(4)->create();
 
         foreach ($users as $user) {
-            Employee::factory(1)->create(['author_email' => $user->email,
-                'director' => serialize(
-                    $hierarchyCreatorService->getDirectorByExecutorId($user->id)
-                ),
+            $director = $hierarchyCreatorService->getDirectorByExecutorId($user->id);
+            Employee::factory(1)->create([
+                'author_email' => $user->email,
+                'director' => serialize($director),
+                'is_director' => $hierarchyCreatorService->isNode($user->id) ? 1 : 0,
                 'position_id' => rand(1, count($positions))
             ]);
         }
