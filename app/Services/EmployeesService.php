@@ -37,4 +37,14 @@ class EmployeesService
         $employee = Employee::find($dirctorId);
         return is_null($employee) ? '' : $employee->full_name;
     }
+
+    public function getDirectorsFullNameList()
+    {
+        $directors = [];
+        $employee = Employee::where('is_director', '=', 1)->get();
+        $employee->each(function($item) use(&$directors){
+            $directors[] = $item->full_name;
+        });
+        return $directors;
+    }
 }

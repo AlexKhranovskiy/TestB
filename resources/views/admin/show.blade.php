@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Quick Example</h3>
+            <h3 class="card-title">Employee</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -79,10 +79,12 @@
                         </div>
                         <div class="form-group">
                             <label>Director:</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control"
-                                       data-mask placeholder="{{$data['director_full_name']}}">
-                            </div>
+                            <select class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;">
+                                <option selected="selected">{{$data['director_full_name']}}</option>
+                                @foreach($data['directors_list'] as $directorFullName)
+                                    <option>{{$directorFullName}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

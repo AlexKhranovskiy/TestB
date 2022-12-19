@@ -31,6 +31,7 @@ class EmployeesController extends Controller
             'salary' => $employee->position->salary,
             'photo' => $employee->photo,
             'director_full_name' => $directorFullName,
+            'directors_list' => $employeesService->getDirectorsFullNameList(),
             'position_id' => $employee->position_id
         ];
         return view('admin.show', ['data' => $data]);
